@@ -1,0 +1,422 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    overflow: hidden;
+    background: #111;
+    font-family: Arial, sans-serif;
+}
+.room {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #11151b;
+    transition: background 1.2s ease;
+}
+.room.light-on {
+    background:
+        radial-gradient(
+            circle at 55% 35%,
+            #fffbd8 0%,
+            #e8da98 20%,
+            #9b8e61 40%,
+            #4a493d 65%,
+            #202228 100%
+        );
+}
+.ceiling {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 75px;
+    background: #292d34;
+    border-bottom: 5px solid #15171b;
+    z-index: 5;
+}
+.door-area {
+    position: absolute;
+    left: 12%;
+    bottom: 145px;
+    width: 250px;
+    height: 335px;
+    z-index: 40;
+}
+.door-frame {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 250px;
+    height: 335px;
+    background: #15171a;
+    border: 12px solid #34383e;
+    border-bottom: none;
+    z-index: 1;
+}
+.bear {
+    position: absolute;
+    left: 50px;
+    bottom: 0;
+    width: 175px;
+    height: 255px;
+    z-index: 3;
+    pointer-events: none;
+}
+.bear-body {
+    position: absolute;
+    left: 38px;
+    top: 115px;
+    width: 105px;
+    height: 140px;
+    background: #784421;
+    border: 5px solid #4b2814;
+    border-radius: 48px 48px 20px 20px;
+    z-index: 2;
+}
+.bear-head {
+    position: absolute;
+    left: 28px;
+    top: 20px;
+    width: 120px;
+    height: 110px;
+    background: #784421;
+    border: 5px solid #4b2814;
+    border-radius: 50%;
+    z-index: 5;
+}
+.ear {
+    position: absolute;
+    top: -17px;
+    width: 40px;
+    height: 40px;
+    background: #784421;
+    border: 5px solid #4b2814;
+    border-radius: 50%;
+}
+.ear.left {
+    left: 5px;
+}
+.ear.right {
+    right: 5px;
+}
+.ear::after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 6px;
+    width: 18px;
+    height: 18px;
+    background: #deaa87;
+    border-radius: 50%;
+}
+.eye {
+    position: absolute;
+    top: 45px;
+    width: 13px;
+    height: 13px;
+    background: #111;
+    border-radius: 50%;
+}
+.eye.left {
+    left: 30px;
+}
+.eye.right {
+    right: 30px;
+}
+.nose {
+    position: absolute;
+    left: 50%;
+    top: 68px;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 16px;
+    background: #111;
+    border-radius: 50%;
+}
+.mouth {
+    position: absolute;
+    left: 50%;
+    top: 82px;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    border-bottom: 4px solid #24140b;
+    border-radius: 50%;
+}
+.bear-arm {
+    position: absolute;
+    left: 110px;
+    top: 125px;
+    width: 36px;
+    height: 155px;
+    background: #784421;
+    border: 5px solid #4b2814;
+    border-radius: 25px;
+    transform-origin: 50% 12px;
+    transform: rotate(-5deg);
+    transition:
+        transform 1.3s cubic-bezier(.25,.8,.25,1);
+    z-index: 7;
+}
+.paw {
+    position: absolute;
+    left: -8px;
+    bottom: -30px;
+    width: 50px;
+    height: 50px;
+    background: #deaa87;
+    border: 4px solid #4b2814;
+    border-radius: 50%;
+    z-index: 10;
+    transition:
+        transform 0.3s ease;
+}
+.bear.reach .bear-arm {
+    transform: rotate(-52deg);
+}
+.bear.holding .bear-arm {
+    transform: rotate(-52deg);
+}
+.door {
+    position: absolute;
+    left: 8px;
+    bottom: 0;
+    width: 214px;
+    height: 315px;
+    background: #493526;
+    border: 8px solid #302219;
+    transform-origin: left center;
+    transition:
+        transform 1s ease;
+    z-index: 10;
+}
+.door-handle {
+    position: absolute;
+    right: 20px;
+    top: 150px;
+    width: 14px;
+    height: 14px;
+    background: #d5aa55;
+    border-radius: 50%;
+}
+.door.open {
+    transform:
+        perspective(800px)
+        rotateY(-78deg);
+}
+.bulb {
+    position: absolute;
+    left: 34%;
+    top: 120px;
+    width: 130px;
+    height: 145px;
+    z-index: 25;
+}
+.bulb-support {
+    position: absolute;
+    left: calc(34% + 62px);
+    top: 35px;
+    width: 6px;
+    height: 95px;
+    background: #44484d;
+    border-radius: 5px;
+    z-index: 10;
+}
+.bulb-glow {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 500px;
+    height: 500px;
+    transform: translateX(-50%);
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,240,150,0.65) 0%,
+            rgba(255,230,120,0.28) 30%,
+            rgba(255,220,100,0.08) 55%,
+            transparent 72%
+        );
+    opacity: 0;
+    transition:
+        opacity 1s ease;
+    pointer-events: none;
+    z-index: -1;
+}
+.room.light-on .bulb-glow {
+    opacity: 1;
+}
+.bulb-glass {
+    position: absolute;
+    left: 15px;
+    top: 5px;
+    width: 100px;
+    height: 105px;
+    border-radius:
+        50%
+        50%
+        45%
+        45%;
+    background: #30343a;
+    border: 4px solid #555b63;
+    transition:
+        background 0.8s ease,
+        box-shadow 0.8s ease;
+}
+.room.light-on .bulb-glass {
+    background: #fff3a6;
+    border-color: #fffbd5;
+    box-shadow:
+        0 0 25px #fff1a3,
+        0 0 60px #ffe77b,
+        0 0 120px rgba(255,220,100,0.8);
+}
+.filament {
+    position: absolute;
+    left: 50%;
+    top: 34px;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 45px;
+    border-left: 4px solid #555;
+    border-right: 4px solid #555;
+    border-bottom: 4px solid #555;
+    border-radius: 0 0 20px 20px;
+    transition:
+        border-color 0.5s ease;
+}
+.room.light-on .filament {
+    border-color: #ff8c00;
+    filter:
+        drop-shadow(0 0 8px orange);
+}
+.bulb-cap {
+    position: absolute;
+    left: 28px;
+    top: 103px;
+    width: 75px;
+    height: 32px;
+    background: #555b63;
+    border-radius:
+        5px
+        5px
+        12px
+        12px;
+    border-top: 4px solid #707781;
+    border-bottom: 5px solid #25282d;
+    z-index: 30;
+}
+.bulb-connector {
+    position: absolute;
+    left: 50%;
+    bottom: -8px;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 12px;
+    background: #292c31;
+    border-radius:
+        0
+        0
+        5px
+        5px;
+}
+.pull-wire {
+    position: absolute;
+    left: calc(34% + 65px);
+    top: 258px;
+    width: 7px;
+    height: 145px;
+    background: #45484d;
+    border-radius: 5px;
+    cursor: grab;
+    z-index: 50;
+    touch-action: none;
+    transition:
+        transform 0.5s ease;
+}
+.pull-wire:active {
+    cursor: grabbing;
+}
+.pull-handle {
+    position: absolute;
+    left: 50%;
+    bottom: -15px;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: #22252a;
+    border: 4px solid #777d85;
+    border-radius: 50%;
+    transition:
+        transform 0.4s ease;
+}
+.floor {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 145px;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #292b30 0px,
+            #292b30 80px,
+            #202226 81px,
+            #202226 160px
+        );
+    border-top: 5px solid #111318;
+    z-index: 2;
+}
+.dark-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+        rgba(0,0,0,0.58);
+    opacity: 1;
+    pointer-events: none;
+    transition:
+        opacity 1.2s ease;
+    z-index: 100;
+}
+.room.light-on .dark-overlay {
+    opacity: 0;
+}
+.instruction {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform:
+        translateX(-50%);
+    padding:
+        12px 22px;
+    color: white;
+    background:
+        rgba(0,0,0,0.6);
+    border-radius: 10px;
+    font-size: 16px;
+    z-index: 200;
+    transition:
+        opacity 0.5s ease;
+}
+.room.light-on .instruction {
+    opacity: 0;
+}
+.status {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 14px;
+    opacity: 0;
+    z-index: 200;
+    transition:
+        opacity 0.5s ease;
+}
+.status.show {
+    opacity: 1;
+}
